@@ -13,7 +13,8 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            //'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Member',
             'enableAutoLogin' => true,
         ],
         'log' => [
@@ -29,5 +30,6 @@ return [
             'errorAction' => 'site/error',
         ],
     ],
+    'language' => 'zh-CN',
     'params' => $params,
 ];
