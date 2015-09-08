@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
@@ -49,6 +50,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             [['birthday'], 'safe'],
             [['name', 'password', 'email', 'realname', 'password_reset_token'], 'string', 'max' => 255],
             [['telephone', 'qq'], 'string', 'max' => 20],
+            [['url'], 'string', 'max' => 128],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             ['name', 'unique', 'message' => 'This username has already been taken.'],
@@ -222,6 +224,18 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
         }
 
         return null;
+    }
+
+    public static function getAuthorLink($id)
+    {
+        $member = static::findIdentity($id);
+        if(!empty($member->url))
+        {
+            return Html::a(Html::encode($member->name),$member->url);
+        }
+        else {
+            return Html::encode($member->name);
+        }
     }
 }
 
