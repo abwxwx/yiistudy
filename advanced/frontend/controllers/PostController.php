@@ -39,7 +39,7 @@ class PostController extends Controller
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         //倒序排列
-        //$dataProvider->query
+        $dataProvider->query->orderBy('created_at DESC');
 
         return $this->render('index', [
             'searchModel' => $searchModel,

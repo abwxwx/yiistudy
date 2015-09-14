@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-index">
 
     <?= ListView::widget([
+        'summary' => '',  //不显示统计信息
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => '_view'
