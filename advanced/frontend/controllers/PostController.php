@@ -36,8 +36,13 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
+        //参数过滤
+        $params = Yii::$app->request->queryParams;
+        $model = new Post();
+        $params = $model->filterParam($params, 'PostSearch');
+
         $searchModel = new PostSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($params);
         //倒序排列
         $dataProvider->query->orderBy('created_at DESC');
 
@@ -81,8 +86,8 @@ class PostController extends Controller
         $user_id = yii::$app->getUser()->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-            //return $this->redirect(['index', 'user_id'=>$user_id]);
+            //return $this->redirect(['view', 'model' => $model]);
+            return $this->redirect(['index', 'user_id'=>$user_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -128,7 +133,7 @@ class PostController extends Controller
     public function actionAdmin()
     {
         $user_id = yii::$app->getUser()->id;
-        $params = array_merge(Yii::$app->request->queryParams, ['user_id' => $user_id]);
+        $params = array_merge(Yii::$app->request->queryParams, ['PostSearch' => ['user_id' => $user_id]]);
         $user_name = Member::findIdentity($user_id)->name;
         $title = '用户'.$user_name.'下的日志';
 

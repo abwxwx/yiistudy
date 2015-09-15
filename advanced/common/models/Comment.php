@@ -61,4 +61,5 @@ class Comment extends \yii\db\ActiveRecord
         $this->content = strip_tags($this->content); //去掉html标签
         parent::save($runValidation, $attributeNames);
     }
+
 }

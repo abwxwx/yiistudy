@@ -105,11 +105,36 @@ class Post extends \yii\db\ActiveRecord
         return Url::to(['post/view', 'id' => $this->id, 'title'=>$this->title]);
     }
 
+    public function filterParam($params, $formName)
+    {
+        $param = array();
+
+        if(is_array($params))
+        {
+            foreach($params as $name=>$value)
+            {
+                if(array_key_exists($name, $this->attributes))
+                {
+                    if(array_key_exists($formName, $param))
+                    {
+                        array_push($param[$formName],array($name=>$value));
+                    }
+                    else
+                    {
+                        $param[$formName] = array($name=>$value);
+                    }
+                }
+            }
+        }
+
+        return $param;
+    }
+
     public function save($runValidation = true, $attributeNames = NULL)
     {
         $this->user_id = Yii::$app->getUser()->id;
         $this->status = 1; //后续可用此字段增加审核功能
-        parent::save($runValidation, $attributeNames);
+        return parent::save($runValidation, $attributeNames);
     }
 
     public function afterSave($insert, $changedAttributes)
@@ -118,5 +143,12 @@ class Post extends \yii\db\ActiveRecord
         if(array_key_exists("tags", $changedAttributes)) {
             Tag::updateFrequency($changedAttributes['tags'], $this->tags);
         }
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        Comment::deleteAll('post_id='.$this->id);
+        Tag::updateFrequency($this->tags, '');
     }
 }
