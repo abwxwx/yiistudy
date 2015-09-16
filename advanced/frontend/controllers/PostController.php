@@ -59,13 +59,23 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+        $id = intval($id);
         $commentmodel = new Comment();
 
         if($commentmodel->load(Yii::$app->request->post()))
         {
-            $commentmodel->post_id = $id;
-            $commentmodel->save();
-            $this->refresh();
+            if (Yii::$app->user->isGuest)
+            {
+                //登录后才能评论
+                Yii::$app->user->returnUrl = Yii::$app->request->getUrl();//记录登录后要返回的地址
+                return $this->redirect(['/site/login']);
+            }
+            else
+            {
+                $commentmodel->post_id = $id;
+                $commentmodel->save();
+                $this->refresh();
+            }
         }
 
         return $this->render('view', [
