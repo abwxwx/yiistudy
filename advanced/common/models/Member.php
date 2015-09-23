@@ -20,8 +20,10 @@ use yii\web\IdentityInterface;
  * @property string $birthday
  * @property string $telephone
  * @property string $qq
- * @property integer $count
+ * @property string $verifyCode
  * @property integer $status
+ * @property string $url
+ * @property string $headPortrait
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $auth_key
@@ -46,10 +48,11 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'password', 'email'], 'required'],
+            [['name', 'password', 'email','verifyCode'], 'required'],
             [['birthday'], 'safe'],
             [['name', 'password', 'email', 'realname', 'password_reset_token'], 'string', 'max' => 255],
             [['telephone', 'qq'], 'string', 'max' => 20],
+            [['verifyCode'], 'string', 'max' => 10],
             [['url'], 'string', 'max' => 128],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
@@ -70,6 +73,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             'birthday' => Yii::t('app', '生日'),
             'telephone' => Yii::t('app', '电话号码'),
             'qq' => Yii::t('app', 'QQ号码'),
+            'verifyCode' => Yii::t('app', '验证码'),
         ];
     }
     /**

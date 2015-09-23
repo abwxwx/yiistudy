@@ -19,7 +19,7 @@ class MemberSearch extends Member
     {
         return [
             [['id', 'count', 'status', 'createtime'], 'integer'],
-            [['name', 'password', 'email', 'realname', 'birthday', 'telephone', 'qq', 'auth_key', 'passward_reset_token'], 'safe'],
+            [['name', 'password', 'email', 'realname', 'birthday', 'telephone', 'qq', 'auth_key', 'password_reset_token'], 'safe'],
         ];
     }
 
@@ -70,7 +70,7 @@ class MemberSearch extends Member
             ->andFilterWhere(['like', 'telephone', $this->telephone])
             ->andFilterWhere(['like', 'qq', $this->qq])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'passward_reset_token', $this->passward_reset_token]);
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token]);
 
         return $dataProvider;
     }
