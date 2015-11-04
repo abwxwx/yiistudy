@@ -16,12 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+<!--            'enableClientValidation' => true  开启表单验证,false为不开启表单验证，-->
+            <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => true]); ?>
                 <?= $form->field($model, 'username') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-9">{input}</div><div class="col-lg-3">{image}</div></div>',
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::classname(), [
+                    'template' => '{input} {image}',
                 ]) ?>
+
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 <div style="color:#999;margin:1em 0">
                     <?= Html::a('忘记密码？', ['site/request-password-reset']) ?>.

@@ -8,6 +8,7 @@ use common\models\MemberSearch;
 use frontend\models\SignupForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 
 /**
@@ -62,8 +63,33 @@ class MemberController extends Controller
     public function actionCreate()
     {
         $model = new Member();
+        $model->setScenario('signup');
 
         if ($model->load(Yii::$app->request->post())) {
+
+            $model->headPortrait= UploadedFile::getInstance($model, 'headPortrait');
+
+            //图片插入数据库时的路径，在Uploads下以当天日期为文件名，前提是在frontend/web/下新建images/uploads文件夹
+            $insert_path ='uploads/' . date('Y-m-d', time()) . '/';
+
+            // 图片保存在本地的路径：images/Uploads/当天日期/文件名，默认放置在frontend/web/下
+            $base_path = 'images/'. $insert_path;
+
+            if ($model->headPortrait)
+            {
+
+                // 如果路径中的文件夹不存在，则新建这一文件夹
+                if(!is_dir($base_path)) {
+                    mkdir($base_path , 0777);
+                }
+
+                // 将图片上传到本地
+                $result = $model->headPortrait->saveAs($base_path . $model->headPortrait->baseName . '.' . $model->headPortrait->extension);
+echo $result;die;
+                // 为了方便在view中遍历出来，在数据库以“当天日期/文件名”形式保存
+                $model->headPortrait = $insert_path . $model->headPortrait->baseName . '.' . $model->headPortrait->extension;
+            }
+
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();

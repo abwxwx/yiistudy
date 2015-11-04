@@ -20,6 +20,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['logout', 'signup','login'],
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -50,6 +51,13 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                //'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'maxLength' => 5,
+                'minLength' => 5,
+                //'backColor' => 0xABABAB,  //更改验证码图片的背景颜色
+            ],
         ];
     }
 
@@ -66,7 +74,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            //return $this->goBack();
+            return $this->goHome();
         } else {
             return $this->render('login', [
                 'model' => $model,

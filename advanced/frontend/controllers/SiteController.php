@@ -63,6 +63,7 @@ class SiteController extends Controller
                 //'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
                 'maxLength' => 5,
                 'minLength' => 5,
+                //'backColor' => 0xABABAB,  //更改验证码图片的背景颜色
             ],
         ];
     }

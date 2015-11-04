@@ -48,7 +48,9 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'password', 'email','verifyCode'], 'required'],
+            [['name', 'password'], 'required', 'on' => ['signup', 'login']],
+            [['email'], 'required', 'on' => ['signup']],
+            [['verifyCode'], 'required', 'on' => ['login']],
             [['birthday'], 'safe'],
             [['name', 'password', 'email', 'realname', 'password_reset_token'], 'string', 'max' => 255],
             [['telephone', 'qq'], 'string', 'max' => 20],
@@ -57,6 +59,14 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             ['name', 'unique', 'message' => 'This username has already been taken.'],
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            'signup' => ['name', 'password', 'email'],
+            'login' => ['name', 'password', 'verifyCode'],
         ];
     }
 
@@ -74,6 +84,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             'telephone' => Yii::t('app', '电话号码'),
             'qq' => Yii::t('app', 'QQ号码'),
             'verifyCode' => Yii::t('app', '验证码'),
+            'headPortrait' => Yii::t('app', '头像请上传'),
         ];
     }
     /**
@@ -230,6 +241,20 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
         return null;
     }
 
+    public static function getAuthorName($id)
+    {
+        $member = static::findIdentity($id);
+        if($member)
+        {
+            return $member->name;
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
     public static function getAuthorLink($id)
     {
         $member = static::findIdentity($id);
@@ -239,6 +264,20 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
         }
         else {
             return Html::encode($member->name);
+        }
+    }
+
+    public static function getAuthorImg($id)
+    {
+        $member = static::findIdentity($id);
+        if(!empty($member->headPortrait))
+        {
+            //var_dump(Yii::$aliases);die;
+            return Yii::$aliases['@webroot'].'/images/'.$member->headPortrait;
+        }
+        else
+        {
+            return Yii::$aliases['@webroot'].'/images/default.jpg';
         }
     }
 }

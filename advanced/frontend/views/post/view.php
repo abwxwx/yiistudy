@@ -42,8 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($commentmodel, 'content')->textarea(['rows' => 6]) ?>
 
-        <div class="form-group">
-            <?= Html::submitButton('提交评论', ['class' =>'btn btn-success pull-right']) ?>
+        <div  class="form-group">
+            <?= Html::submitButton('提交评论', ['id'=>"postsubmit", 'class' =>'btn btn-success pull-right']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
@@ -62,9 +62,52 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php echo $this->render('_comments',[
             'post'=>$model,
             'comments'=>$model->comments,
+            'inputname'=>Html::getInputName($commentmodel, 'content'),
         ]); ?>
     <?php endif; ?>
 </div>
+
+<?php $this->beginBlock('test') ?>
+    $(function(){
+        var parentElement = document.getElementById("comment");
+        var commentArr = parentElement.getElementsByTagName("form");
+        var replayArr = parentElement.getElementsByTagName("a");
+        var openArr=new Array();
+        $(replayArr).each(function(index){
+            openArr[index]=0;
+            $(replayArr[index]).bind('click',function(){
+                if(openArr[index] == 0)
+                {
+                    $(commentArr[index]).show();
+                    openArr[index]=1;
+                }
+                else
+                {
+                    $(commentArr[index]).hide();
+                    openArr[index]=0;
+                }
+            });
+        });
+console.log(openArr);
+
+        function checkguest()
+        {
+			var check = <?php echo Yii::$app->user->isGuest?1:0; ?>;
+            if(check == 1)
+            {
+                alert("请登录后评论");
+            }
+        }
+        $("#postsubmit").bind('click',function(){
+            checkguest();
+        })
+        $("#recomment").bind('click',function(){
+            checkguest();
+        });
+    });
+<?php $this->endBlock() ?>
+<?php $this->registerJs($this->blocks['test'], \yii\web\View::POS_END); ?>
+
 
 
 

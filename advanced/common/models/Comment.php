@@ -58,7 +58,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         $this->user_id = Yii::$app->getUser()->id;
         $this->created_at = time();
-        $this->content = strip_tags($this->content); //去掉html标签
+        //$this->content = strip_tags($this->content); //去掉html标签
         parent::save($runValidation, $attributeNames);
     }
 
