@@ -1,5 +1,4 @@
 <?php
-
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
@@ -73,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
         var commentArr = parentElement.getElementsByTagName("form");
         var replayArr = parentElement.getElementsByTagName("a");
         var openArr=new Array();
+console.log(replayArr.length);
         $(replayArr).each(function(index){
             openArr[index]=0;
             $(replayArr[index]).bind('click',function(){
@@ -92,7 +92,7 @@ console.log(openArr);
 
         function checkguest()
         {
-			var check = <?php echo Yii::$app->user->isGuest?1:0; ?>;
+            var check = <?php echo Yii::$app->user->isGuest?1:0; ?>;
             if(check == 1)
             {
                 alert("请登录后评论");

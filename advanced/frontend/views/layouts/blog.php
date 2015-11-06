@@ -14,7 +14,7 @@ use frontend\assets\AppAsset;
             <?= $content ?>
         </div>
         <div class="col-md-3">
-            <div id="sidebar">
+            <div id="sidebar" data-spy="affix" data-offset-top="125">
                 <?php if(!Yii::$app->user->isGuest) :?>
 
                     <?php echo Nav::widget([

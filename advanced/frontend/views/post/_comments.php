@@ -30,10 +30,10 @@ use common\models\Member;
         <br/>
     </div>
 
-    <div class="comment" style="padding:5px 50px">
+    <div class="comment"  style="padding:5px 50px">
         <br/>
-<!--        --><?php //echo nl2br(Html::encode($comment->content)); ?>
-        <?php echo nl2br($comment->content); ?>
+
+        <div><?php echo nl2br($comment->content); ?></div>
 
         <div>
             <a class="btn pull-right" type="button">回复</a>
