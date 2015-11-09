@@ -1,51 +1,50 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
+$imagepath = Yii::getAlias('@web').'/images';
 ?>
+
+
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<div id="slidershow" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <!-- 设置图片轮播的顺序 -->
+    <ol class="carousel-indicators">
+        <li class="active" data-target="#slidershow" data-slide-to="0"></li>
+        <li data-target="#slidershow" data-slide-to="1"></li>
+        <li data-target="#slidershow" data-slide-to="2"></li>
+    </ol>
+    <!-- 设置轮播图片 -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="<?php echo $imagepath.'/IMG_0494.JPG'; ?>" alt="">
         </div>
-
+        <div class="item">
+            <img src="<?php echo $imagepath.'/IMG_0515.JPG'; ?>" alt="">
+        </div>
+        <div class="item">
+            <img src="<?php echo $imagepath.'/IMG_9799.JPG'; ?>" alt="">
+        </div>
     </div>
+    <a class="left carousel-control " href="#slidershow" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#slidershow" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
 </div>
+</div>
+
+<style>
+    #slidershow{
+        height: 500px;
+        background-color: #000000;
+    }
+    #slidershow .item{
+        height: 500px;
+        background-color: #000000;
+    }
+    #slidershow .carousel-inner .item img{
+        /*图片自动缩放*/
+        width:100%;
+    }
+</style>
