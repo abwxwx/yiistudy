@@ -53,6 +53,39 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
+    /*制作盖楼式评论，整合评论内容*/
+    public function dealContent($post)
+    {
+        if(!isset($post['replaytext']))
+        {
+            return true;
+        }
+
+        $lastcontent='';
+        $precontent='';
+        $content = $post['replaytext'];
+        $count = substr_count($content, 'pull-right')+1;
+        $pos = strrpos($content, '</div>');
+        if($pos === false)
+        {
+            $lastcontent = $content;
+        }
+        else
+        {
+            $precontent = substr($content, 0, $pos+6);
+            $lastcontent = substr($content, $pos+6);
+        }
+
+        $this->content = "<div class='replaydiv'>$precontent<span class='replayauthor'>".$post['replayname']."的原贴： </span>"."<span class='pull-right'>$count</span><p>$lastcontent</p></div>".$this->content;
+
+        if(strlen($this->content) > 65535)
+        {
+            //数据库该字段为text,防止越界
+            return false;
+        }
+        return true;
+    }
+
 
     public function save($runValidation = true, $attributeNames = NULL)
     {

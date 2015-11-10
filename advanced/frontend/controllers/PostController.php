@@ -73,8 +73,15 @@ class PostController extends Controller
             else
             {
                 $commentmodel->post_id = $id;
-                $commentmodel->save();
-                $this->refresh();
+                $result = $commentmodel->dealContent(Yii::$app->request->post());
+                if($result)
+                {
+                    $commentmodel->save();
+                    $this->refresh();
+                }
+                else{
+                    Yii::$app->getSession()->setFlash('error', '评论内容过多或盖楼太多，请调整后重新提交评论');
+                }
             }
         }
 

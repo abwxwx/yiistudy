@@ -4,28 +4,16 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use common\models\Member;
+
+$imagepath = Yii::getAlias('@web').'/images';
 ?>
 
-<style>
-    .replaydiv{
-        background-color: #f8f8f8;
-        margin: 5px 2px;
-        border: 1px solid #f8f8f8;
-    }
-
-    .replayspan{
-        color: #0000ff;
-        font-weight: bold;
-        line-height: 2;
-    }
-</style>
-
 <?php foreach($comments as $comment): ?>
-<div class="comment" id="c<?php echo $comment->id; ?>">
+<div class="commentbody" id="c<?php echo $comment->id; ?>">
     <br/>
     <hr />
     <div class="author">
-        <?php echo Html::img('/bjstudy/yiistudy/advanced/frontend/web/images/default.jpg', ['width'=>50, 'height'=>50]);?>
+        <?php echo Html::img($imagepath.'/default.jpg', ['width'=>50, 'height'=>50]);?>
         <?php  echo Html::decode(Member::getAuthorLink($comment->user_id)); ?> <em class="pull-right"><?php echo date('Y年 n月 j日  G:i',$comment->created_at); ?></em>
         <br/>
     </div>
@@ -33,7 +21,7 @@ use common\models\Member;
     <div class="comment"  style="padding:5px 50px">
         <br/>
 
-        <div><?php echo nl2br($comment->content); ?></div>
+        <div class="commentbody"><?php echo nl2br($comment->content); ?></div>
 
         <div>
             <a class="btn pull-right" type="button">回复</a>
@@ -55,5 +43,23 @@ use common\models\Member;
 <?php endforeach; ?>
 
 
+<style>
+    .replaydiv{
+        background-color: #f8f8f8;
+        margin: 5px 2px;
+        border: 1px solid #c4e3f3;
+        padding:0 3px;
+    }
+
+    .replayauthor{
+        color: #00b3ee;
+        line-height: 2;
+    }
+
+    .replaydiv p{
+        margin-top: 5px;
+        font-size: 15px;
+    }
+</style>
 
 
