@@ -6,7 +6,7 @@ $imagepath = Yii::getAlias('@web').'/images';
 
 
 <div class="site-index">
-<div id="slidershow" class="carousel slide" data-ride="carousel" data-interval="3000">
+<div id="slidershow" class="carousel slide" data-ride="carousel" data-interval="7000">
     <!-- 设置图片轮播的顺序 -->
     <ol class="carousel-indicators">
         <li class="active" data-target="#slidershow" data-slide-to="0"></li>
