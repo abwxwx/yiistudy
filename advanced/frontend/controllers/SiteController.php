@@ -91,13 +91,9 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
-        //退出登录后回到原来页面
-        $returnUrl = Yii::$app->request->headers['Referer'];
-
         Yii::$app->user->logout();
 
-        //return $this->goHome();
-        return $this->goBack($returnUrl);
+        return $this->goHome();
     }
 
     public function actionContact()

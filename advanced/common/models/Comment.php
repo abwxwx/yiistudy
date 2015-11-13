@@ -56,7 +56,6 @@ class Comment extends \yii\db\ActiveRecord
     /*制作盖楼式评论，整合评论内容*/
     public function dealContent($post)
     {
-        $this->content = strip_tags($this->content); //去掉html标签
         if(!isset($post['replaytext']))
         {
             return true;
@@ -79,10 +78,9 @@ class Comment extends \yii\db\ActiveRecord
 
         $this->content = "<div class='replaydiv'>$precontent<span class='replayauthor'>".$post['replayname']."的原贴： </span>"."<span class='pull-right'>$count</span><p>$lastcontent</p></div>".$this->content;
 
-        //数据库该字段为text,防止越界
         if(strlen($this->content) > 65535)
         {
-            $this->content="";//防止评论失败时，将拼接好的信息回写评论文本框
+            //数据库该字段为text,防止越界
             return false;
         }
         return true;
