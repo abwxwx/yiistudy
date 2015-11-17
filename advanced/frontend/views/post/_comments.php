@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use common\models\Member;
 
-$imagepath = Yii::getAlias('@web').'/images';
 ?>
 
 <?php foreach($comments as $comment): ?>
@@ -13,7 +12,7 @@ $imagepath = Yii::getAlias('@web').'/images';
     <br/>
     <hr />
     <div class="author">
-        <?php echo Html::img($imagepath.'/default.jpg', ['width'=>50, 'height'=>50]);?>
+        <?php echo Html::img(Member::getAuthorImg($comment->user_id), ['width'=>50, 'height'=>50]);?>
         <?php  echo Html::decode(Member::getAuthorLink($comment->user_id)); ?> <em class="pull-right"><?php echo date('Y年 n月 j日  G:i',$comment->created_at); ?></em>
         <br/>
     </div>

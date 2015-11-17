@@ -273,11 +273,11 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
         if(!empty($member->headPortrait))
         {
             //var_dump(Yii::$aliases);die;
-            return Yii::$aliases['@webroot'].'/images/'.$member->headPortrait;
+            return Yii::$aliases['@web'].'/images/'.$member->headPortrait;
         }
         else
         {
-            return Yii::$aliases['@webroot'].'/images/default.jpg';
+            return Yii::$aliases['@web'].'/images/default.jpg';
         }
     }
 }

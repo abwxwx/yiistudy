@@ -14,34 +14,34 @@ use frontend\assets\AppAsset;
             <?= $content ?>
         </div>
         <div class="col-md-3">
-            <div id="sidebar" data-spy="affix" data-offset-top="125">
-                <?php if(!Yii::$app->user->isGuest) :?>
-
-                    <?php echo Nav::widget([
-                        'items' => [
-                            [
-                                'label' => '日志首页',
-                                'url' => ['post/index'],
-                            ],
-                            [
-                                'label' => '新建日志',
-                                'url'=>['post/create'],
-                            ],
-                            [
-                                'label' => '日志管理',
-                                'url'=>['post/admin'],
-                            ],
-                            [
-                                'label' => '注销',
-                                'url'=>['site/logout'],
-                                'linkOptions' => ['data-method' => 'post'],
-                            ],
-
-                        ],
-                        'options' => ['class' =>'nav-tabs'],
-                        'encodeLabels'=>false
-                    ]); ?>
-                <?php endif; ?>
+            <div class="hidden-xs hidden-ms" id="sidebar" data-spy="affix" data-offset-top="125" style="width:260px">
+<!--                --><?php //if(!Yii::$app->user->isGuest) :?>
+<!---->
+<!--                    --><?php //echo Nav::widget([
+//                        'items' => [
+//                            [
+//                                'label' => '日志首页',
+//                                'url' => ['post/index'],
+//                            ],
+//                            [
+//                                'label' => '新建日志',
+//                                'url'=>['post/create'],
+//                            ],
+//                            [
+//                                'label' => '日志管理',
+//                                'url'=>['post/admin'],
+//                            ],
+//                            [
+//                                'label' => '注销',
+//                                'url'=>['site/logout'],
+//                                'linkOptions' => ['data-method' => 'post'],
+//                            ],
+//
+//                        ],
+//                        'options' => ['class' =>'nav-tabs'],
+//                        'encodeLabels'=>false
+//                    ]); ?>
+<!--                --><?php //endif; ?>
 
                 <br/>
                 <br/>

@@ -5,6 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
+use common\models\Member;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -26,33 +27,53 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => '圆圆的精彩生活',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Blog', 'url' => ['/post/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => '首页', 'url' => ['/site/index']],
+                ['label' => '日志', 'url' => ['/post/index']],
+                ['label' => '关于我们', 'url' => ['/site/about']],
+                ['label' => '联系我们', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/member/create']];
+                $menuItems[] = ['label' => '注册', 'url' => ['/member/create']];
                 //$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
             } else {
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->name . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
+                    'label' => Yii::$app->user->identity->name,
+                    'items' => [
+                        [
+                            'label' => '新建日志',
+                            'url' => ['/post/create'],
+                        ],
+                        [
+                            'label' => '日志管理',
+                            'url' => ['/post/admin'],
+                        ],
+                        [
+                            'label' => '退出登录',
+                            'url'=>['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post'],
+                        ],
+                    ],
                 ];
+//                $menuItems[] = [
+//                    'label' => 'Logout (' . Yii::$app->user->identity->name . ')',
+//                    'url' => ['/site/logout'],
+//                    'linkOptions' => ['data-method' => 'post']
+//                ];
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
             ]);
+
             NavBar::end();
         ?>
 
