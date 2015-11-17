@@ -38,14 +38,14 @@ use frontend\assets\AppAsset;
                             ],
 
                         ],
-                        'options' => ['class' =>'nav-pills nav-stacked'],
+                        'options' => ['class' =>'nav-tabs'],
                         'encodeLabels'=>false
                     ]); ?>
                 <?php endif; ?>
 
                 <br/>
                 <br/>
-                <?php echo \frontend\components\TagCloud::widget(['maxTags'=>10]); ?>
+                <?php echo \frontend\components\TagCloud::widget(['maxTags'=>14]); ?>
 
             </div>
         </div>

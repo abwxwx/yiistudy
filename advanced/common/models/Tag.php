@@ -97,7 +97,8 @@ class Tag extends \yii\db\ActiveRecord
 
         $total = array_sum($tags);
         foreach($tags as $tag=>$frequency) {
-            $tags[$tag]=8+(int)(16*$frequency/($total+10));
+            //$tags[$tag]=8+(int)(16*$frequency/($total+10));
+            $tags[$tag]=18;//网站初创阶段，让字体统一大些
         }
 //            Yii::$app->cache->set('Tag.findTagWeights_'.$maxTags, $tags, 3600);
 //        }

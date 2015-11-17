@@ -14,14 +14,15 @@ class TagCloud extends Portlet {
     {
         $tags=Tag::findTagWeights($this->maxTags);
 //        $tags = ['test'=>14, 'sss'=>20];
-
+        echo Html::begintag('ul',array('class'=>'list-inline'));
         foreach($tags as $tag=>$weight)
         {
-            $link=Html::a(Html::encode($tag), array('post/index','tags'=>$tag));
-            echo Html::tag('span', $link, array(
-                    'class'=>'label label-info',
-                    'style'=>"font-size:{$weight}px",
+            $link=Html::a(Html::encode($tag), array('post/index','tags'=>$tag))."\n";
+            echo Html::tag('li', $link, array(
+                    //'class'=>'label label-info',
+                    'style'=>"font-size:{$weight}px;margin:2px",
                 ) )."\n";
         }
+        echo Html::endTag('ul');
     }
 } 
