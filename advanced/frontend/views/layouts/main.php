@@ -60,6 +60,7 @@ AppAsset::register($this);
                             'label' => '退出登录',
                             'url'=>['/site/logout'],
                             'linkOptions' => ['data-method' => 'post'],
+                            'options' => ['id' => 'logout'],
                         ],
                     ],
                 ];
@@ -97,3 +98,19 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+
+<script>
+    $(function(){
+        $("#logout").bind('click', function(){
+            if(document.getElementById("publish"))
+            {
+                var res = confirm("日志正在编辑中，退出登录信息将丢失，确认退出吗？");
+                if(!res)
+                {
+                    $(".dropdown-toggle").click();
+                    return false;
+                }
+            }
+        });
+    });
+</script>

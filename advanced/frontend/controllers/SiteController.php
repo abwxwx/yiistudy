@@ -94,6 +94,13 @@ class SiteController extends Controller
         //退出登录后回到原来页面
         $returnUrl = Yii::$app->request->headers['Referer'];
 
+        //判断returnUrl是否为新建日志页
+        //加入urlmanager之后可能要调整
+        if(preg_match('/r=post%2Fcreate/', $returnUrl) != 0)//匹配上了，说明是新建日志页，
+        {
+            $returnUrl = Yii::$app->homeUrl;
+        }
+
         Yii::$app->user->logout();
 
         //return $this->goHome();

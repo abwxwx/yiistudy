@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'publish']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
