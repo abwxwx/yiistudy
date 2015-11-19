@@ -37,8 +37,8 @@ AppAsset::register($this);
             $menuItems = [
                 ['label' => '首页', 'url' => ['/site/index']],
                 ['label' => '日志', 'url' => ['/post/index']],
-                ['label' => '关于我们', 'url' => ['/site/about']],
-                ['label' => '联系我们', 'url' => ['/site/contact']],
+               // ['label' => '关于我们', 'url' => ['/site/about']],
+               // ['label' => '联系我们', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => '注册', 'url' => ['/member/create']];

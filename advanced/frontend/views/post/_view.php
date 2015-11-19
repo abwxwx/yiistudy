@@ -34,8 +34,9 @@ use yii\helpers\Html;
         <?= \yii\helpers\Markdown::process($content); ?>
         </p>
     </div>
-    <nav class="navbar navbar-default" role="navigation">
-        <p><b>标签:  </b>
+    <nav class="navbar navbar-default" role="navigation"  style="padding:15px 5px">
+
+        <span><b>标签:  </b>
         <?php
         $tags = explode(',', $model->tags);
         foreach($tags as $tag)
@@ -43,10 +44,9 @@ use yii\helpers\Html;
             echo $tag, ' ';
         }
         ?>
-        </p>
-        <p><?php echo Html::a("Comments ({$model->commentCount})",$model->url.'#comments'); ?>
-<!--            | Last updated on --><?php //echo date('F j, Y',$model->updated_at); ?>
-        </p>
+        </span>
+        <span class="pull-right"><?php echo Html::a("Comments ({$model->commentCount})",$model->url.'#comments'); ?>
+        </span>
     </nav>
     <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
 </div>
