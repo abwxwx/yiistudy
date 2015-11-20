@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
         var commentArr = parentElement.getElementsByTagName("form");
         var replayArr = parentElement.getElementsByTagName("a");
         var openArr=new Array();
-console.log(replayArr.length);
+
         $(replayArr).each(function(index){
             openArr[index]=0;
             $(replayArr[index]).bind('click',function(){
@@ -88,7 +88,6 @@ console.log(replayArr.length);
                 }
             });
         });
-console.log(openArr);
 
         function checkguest()
         {
@@ -103,6 +102,22 @@ console.log(openArr);
         })
         $("#recomment").bind('click',function(){
             checkguest();
+        });
+    });
+
+    $(window).load(function(){
+        $(".panel-body img").each(function(){
+            var tableWidth = $(".panel-body").width(); //表格宽度
+            var img = new Image();
+            img.src = $(this).attr("src") ;
+            var imgWidth = img.width; //图片实际宽度
+            console.log(tableWidth);
+            console.log(imgWidth);
+            if(imgWidth < tableWidth){
+                $(this).attr("style","width: auto");
+            }else{
+                $(this).attr("style","width: 100%");
+            }
         });
     });
 <?php $this->endBlock() ?>
